@@ -7,6 +7,10 @@
     <link rel="icon" href="{{ asset('images/logo/favicon.ico') }}" type="image/x-icon">
 
     <title>Terra | Italian Restaurant</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     @vite('resources/css/app.css')
     <style>
         @media (max-width: 767px) {
@@ -17,6 +21,7 @@
                 background-position: center;
                 background-size: cover;
             }
+
             .mobile-bg-image::before {
                 content: "";
                 position: absolute;
@@ -28,7 +33,8 @@
                 pointer-events: none;
                 z-index: 0;
             }
-            .mobile-bg-image > * {
+
+            .mobile-bg-image>* {
                 position: relative;
                 z-index: 1;
             }
@@ -60,18 +66,25 @@
     <!-- Hero Section -->
     <section id="home" class="relative min-h-screen flex">
         {{-- Left Side (Text) --}}
-        <div class="md:w-1/2 w-full mobile-bg-image bg-cover bg-center bg-no-repeat md:bg-none md:bg-choco-800 text-white flex flex-col justify-between px-12 py-10">
+        <div
+            class="md:w-1/2 w-full mobile-bg-image bg-cover bg-center bg-no-repeat md:bg-none md:bg-choco-800 text-white flex flex-col justify-between px-12 py-10">
             <div class="my-auto">
                 <h1 class="text-4xl md:text-5xl font-serif font-bold leading-tight">
                     Terra is a Michelin-starred restaurant<br>
                     that offers a sophisticated exploration<br>
                     of Italian’s culinary heritage.
                 </h1>
-                <a href="#reservation" class="inline-block mt-8 px-6 py-3 border border-white rounded text-white hover:bg-white hover:text-[#5B2C1F] transition">
+                <button type="button"
+                    class="mt-8 px-6 py-3 border border-white rounded bg-transparent text-white transition-colors
+                    hover:!bg-white hover:!text-[#5B2C1F]"
+                    data-bs-toggle="modal" data-bs-target="#reservationModal">
                     Reservation →
-                </a>
+                </button>
             </div>
         </div>
+
+        <!-- Include modal reservation -->
+        @include('components.reservation')
 
         {{-- Right Side (Image) --}}
         <div class="w-0 md:w-1/2">
@@ -89,9 +102,12 @@
 
                 <!-- Left Column -->
                 <div class="flex flex-col gap-6">
-                    <img src="{{ asset('images/menu/Bruschetta.png') }}" alt="Menu Left 1" class="shadow-lg object-none w-full">
-                    <img src="{{ asset('images/menu/Tomato-topped-bread.png') }}" alt="Menu Left 2" class="shadow-lg object-none w-full">
-                    <img src="{{ asset('images/menu/Ravioli.png') }}" alt="Menu Left 3" class="shadow-lg object-none w-full">
+                    <img src="{{ asset('images/menu/Bruschetta.png') }}" alt="Menu Left 1"
+                        class="shadow-lg object-none w-full">
+                    <img src="{{ asset('images/menu/Tomato-topped-bread.png') }}" alt="Menu Left 2"
+                        class="shadow-lg object-none w-full">
+                    <img src="{{ asset('images/menu/Ravioli.png') }}" alt="Menu Left 3"
+                        class="shadow-lg object-none w-full">
                 </div>
 
                 <!-- Right Column -->
@@ -102,9 +118,12 @@
                     </div>
 
                     <!-- Right Images -->
-                    <img src="{{ asset('images/menu/Pasta-soup.png') }}" alt="Menu Right 1" class="shadow-lg object-none w-full">
-                    <img src="{{ asset('images/menu/Penne-pasta.png') }}" alt="Menu Right 2" class="shadow-lg object-none w-full">
-                    <img src="{{ asset('images/menu/Tiramisu.png') }}" alt="Menu Right 3" class="shadow-lg object-none w-full">
+                    <img src="{{ asset('images/menu/Pasta-soup.png') }}" alt="Menu Right 1"
+                        class="shadow-lg object-none w-full">
+                    <img src="{{ asset('images/menu/Penne-pasta.png') }}" alt="Menu Right 2"
+                        class="shadow-lg object-none w-full">
+                    <img src="{{ asset('images/menu/Tiramisu.png') }}" alt="Menu Right 3"
+                        class="shadow-lg object-none w-full">
                 </div>
 
             </div>
@@ -123,14 +142,20 @@
             <div class="grid grid-cols-4 md:grid-cols-8 gap-4">
 
                 <!-- Top Row -->
-                <img src="{{ asset('images/gallery/image-1.png') }}" alt="Gallery 1" class="col-span-2 md:col-span-2 object-cover w-full h-96 shadow-lg">
-                <img src="{{ asset('images/gallery/image-2.png') }}" alt="Gallery 2" class="col-span-2 md:col-span-2 object-cover w-full h-96 shadow-lg">
-                <img src="{{ asset('images/gallery/image-3.png') }}" alt="Gallery 3" class="col-span-2 md:col-span-4 object-cover w-full h-96 shadow-lg">
+                <img src="{{ asset('images/gallery/image-1.png') }}" alt="Gallery 1"
+                    class="col-span-2 md:col-span-2 object-cover w-full h-96 shadow-lg">
+                <img src="{{ asset('images/gallery/image-2.png') }}" alt="Gallery 2"
+                    class="col-span-2 md:col-span-2 object-cover w-full h-96 shadow-lg">
+                <img src="{{ asset('images/gallery/image-3.png') }}" alt="Gallery 3"
+                    class="col-span-2 md:col-span-4 object-cover w-full h-96 shadow-lg">
 
                 <!-- Bottom Row -->
-                <img src="{{ asset('images/gallery/image-4.png') }}" alt="Gallery 4" class="col-span-2 md:col-span-4 object-cover w-full h-96 shadow-lg">
-                <img src="{{ asset('images/gallery/image-5.png') }}" alt="Gallery 5" class="col-span-2 md:col-span-2 object-cover w-full h-96 shadow-lg">
-                <img src="{{ asset('images/gallery/image-6.png') }}" alt="Gallery 6" class="col-span-2 md:col-span-2 object-cover w-full h-96 shadow-lg">
+                <img src="{{ asset('images/gallery/image-4.png') }}" alt="Gallery 4"
+                    class="col-span-2 md:col-span-4 object-cover w-full h-96 shadow-lg">
+                <img src="{{ asset('images/gallery/image-5.png') }}" alt="Gallery 5"
+                    class="col-span-2 md:col-span-2 object-cover w-full h-96 shadow-lg">
+                <img src="{{ asset('images/gallery/image-6.png') }}" alt="Gallery 6"
+                    class="col-span-2 md:col-span-2 object-cover w-full h-96 shadow-lg">
 
             </div>
         </div>
@@ -148,7 +173,8 @@
                 <div class="space-y-4">
                     <!-- Item 1 -->
                     <div class="border-b border-white pb-4">
-                        <button onclick="toggleAccordion(0)" class="w-full flex justify-between items-center text-2xl focus:outline-none">
+                        <button onclick="toggleAccordion(0)"
+                            class="w-full flex justify-between items-center text-2xl focus:outline-none">
                             <span>The Salon</span>
                             <span>+</span>
                         </button>
@@ -159,7 +185,8 @@
 
                     <!-- Item 2 -->
                     <div class="border-b border-white pb-4">
-                        <button onclick="toggleAccordion(1)" class="w-full flex justify-between items-center text-2xl focus:outline-none">
+                        <button onclick="toggleAccordion(1)"
+                            class="w-full flex justify-between items-center text-2xl focus:outline-none">
                             <span>The Dining Room</span>
                             <span>+</span>
                         </button>
@@ -170,7 +197,8 @@
 
                     <!-- Item 3 -->
                     <div class="border-b border-white pb-4">
-                        <button onclick="toggleAccordion(2)" class="w-full flex justify-between items-center text-2xl focus:outline-none">
+                        <button onclick="toggleAccordion(2)"
+                            class="w-full flex justify-between items-center text-2xl focus:outline-none">
                             <span>The Counter</span>
                             <span>+</span>
                         </button>
@@ -181,7 +209,8 @@
 
                     <!-- Item 4 -->
                     <div class="border-b border-white pb-4">
-                        <button onclick="toggleAccordion(3)" class="w-full flex justify-between items-center text-2xl focus:outline-none">
+                        <button onclick="toggleAccordion(3)"
+                            class="w-full flex justify-between items-center text-2xl focus:outline-none">
                             <span>Large Parties & Events</span>
                             <span>+</span>
                         </button>
@@ -194,7 +223,8 @@
 
             <!-- Image Right -->
             <div class="w-full md:w-1/2">
-                <img src="{{ asset('images/dining-room.png') }}" alt="Dining Space" class="w-full h-auto object-cover rounded-md shadow-lg">
+                <img src="{{ asset('images/dining-room.png') }}" alt="Dining Space"
+                    class="w-full h-auto object-cover rounded-md shadow-lg">
             </div>
         </div>
     </section>
@@ -212,6 +242,7 @@
         <p>&copy; {{ date('Y') }} Terra Restaurant. All rights reserved.</p>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
