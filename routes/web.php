@@ -26,14 +26,6 @@ Route::middleware(['auth', 'role.admin'])->group(function () {
     Route::resource('reservations', ReservationController::class)->except(['create', 'edit']);
 });
 
-Route::middleware(['auth', 'role.user'])->group(function () {
-    Route::get('/home', [UserController::class, 'index'])->name('home');
-
-    Route::resource('menus-user', MenuUserController::class);
-    Route::resource('orders-user', OrderUserController::class)->except(['create', 'edit']);
-    Route::resource('reservations-user', ReservationUserController::class)->except(['create', 'edit']);
-});
-
 Route::middleware(['auth', 'role.waiter'])->group(function () {
     Route::get('/waiter', [WaiterController::class, 'index'])->name('waiter.dashboard');
 
