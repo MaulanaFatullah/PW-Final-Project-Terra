@@ -26,3 +26,8 @@ Route::middleware(['auth', 'role.admin'])->group(function () {
     Route::resource('reservations', ReservationController::class)->except(['create', 'edit']);
 });
 
+Route::middleware(['auth', 'role.waiter'])->group(function () {
+    Route::get('/waiter', [WaiterController::class, 'index'])->name('waiter.dashboard');
+
+    Route::resource('orders-waiter', OrderWaiterController::class)->only(['index', 'show', 'update']);
+});
