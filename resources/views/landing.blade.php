@@ -11,6 +11,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     @vite('resources/css/app.css')
     <style>
         @media (max-width: 767px) {
@@ -58,7 +59,17 @@
                 <a href="#menu" class="hover:text-yellow-200 transition">Menu</a>
                 <a href="#gallery" class="hover:text-yellow-200 transition">Gallery</a>
                 <a href="#space" class="hover:text-yellow-200 transition">Space</a>
-                <!-- <a href="#faq" class="hover:text-yellow-200 transition">FAQ</a> -->
+                @auth
+                    @if (auth()->user()->role->name == 'waiter')
+                        <a href="{{ url('/waiter') }}" class="hover:text-yellow-200 transition">Dashboard</a>
+                    @elseif (auth()->user()->role->name == 'admin')
+                        <a href="{{ url('/admin') }}" class="hover:text-yellow-200 transition">Dashboard</a>
+                    @elseif (auth()->user()->role->name == 'user')
+                        <a href="{{ url('/home') }}" class="hover:text-yellow-200 transition">Dashboard</a>
+                    @endif
+                @else
+                    <a href="{{ route('login') }}" class="hover:text-yellow-200 transition">Login</a>
+                @endauth
             </nav>
         </div>
     </header>
@@ -229,70 +240,6 @@
         </div>
     </section>
 
-    <!-- Frequently Asked Questions Section -->
-    <section id="faq" class="w-full bg-choco-700 text-white font-serif py-16 px-6 md:px-16">
-        <div class="w-full">
-            <h2 class="text-3xl font-normal mb-8 tracking-widest text-center">_ FAQ _</h2>
-
-            <div class="space-y-4">
-                <!-- Item 1 -->
-                <div class="border-b border-white pb-4">
-                    <button onclick="toggleAccordion(4)"
-                        class="w-full flex justify-between items-center text-2xl focus:outline-none">
-                        <span> Do I need to make a reservation in advance?</span>
-                        <span>+</span>
-                    </button>
-                    <div class="mt-2 hidden text-white text-lg" id="accordion-4">
-                        Yes, we highly recommend making a reservation in advance to ensure availability, especially on
-                        weekends and special occasions. Walk-ins are welcome but subject to seating availability.
-                    </div>
-                </div>
-
-                <!-- Item 2 -->
-                <div class="border-b border-white pb-4">
-                    <button onclick="toggleAccordion(5)"
-                        class="w-full flex justify-between items-center text-2xl focus:outline-none">
-                        <span>Does Terra cater to dietary restrictions or allergies?</span>
-                        <span>+</span>
-                    </button>
-                    <div class="mt-2 hidden text-white text-lg" id="accordion-5">
-                        We do our best to accommodate certain dietary needs; however, due to the nature of our set menu,
-                        we are unable to cater to vegan, celiac, and certain severe allergies (e.g., allium, seafood,
-                        dairy). Please inform us at the time of booking.
-                    </div>
-                </div>
-
-                <!-- Item 3 -->
-                <div class="border-b border-white pb-4">
-                    <button onclick="toggleAccordion(6)"
-                        class="w-full flex justify-between items-center text-2xl focus:outline-none">
-                        <span>Can I celebrate a special occasion at Terra?</span>
-                        <span>+</span>
-                    </button>
-                    <div class="mt-2 hidden text-white text-lg" id="accordion-6">
-                        Absolutely! Whether it's a birthday, anniversary, or romantic dinner, we’re happy to make your
-                        experience special. Just let us know in advance and we can help with personalized touches like a
-                        small cake, message plate, or table decorations.
-                    </div>
-                </div>
-
-                <!-- Item 4 -->
-                <div class="border-b border-white pb-4">
-                    <button onclick="toggleAccordion(7)"
-                        class="w-full flex justify-between items-center text-2xl focus:outline-none">
-                        <span>What is your cancellation policy?</span>
-                        <span>+</span>
-                    </button>
-                    <div class="mt-2 hidden text-white text-lg" id="accordion-7">
-                        Cancellations or rescheduling must be made at least 72 hours before the reservation time.
-                        No-shows or late cancellations are subject to a cancellation fee as stated in our booking
-                        policy.
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <script>
         function toggleAccordion(index) {
             const panel = document.getElementById(`accordion-${index}`);
@@ -300,12 +247,14 @@
         }
     </script>
 
+
     <!-- Footer -->
     <footer class="bg-choco-800 font-serif text-white text-center py-6">
         <p>&copy; {{ date('Y') }} Terra Restaurant. All rights reserved.</p>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 
 </html>
